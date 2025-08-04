@@ -63,8 +63,11 @@ function WeeklyChores() {
           style={{ borderColor: "#ccc" }}
         >
           <div
-            className="text-white font-bold text-lg py-2 rounded-t"
-            style={{ backgroundColor: memberColors[idx % memberColors.length] }}
+            className="font-bold text-lg py-2 rounded-t"
+            style={{
+              backgroundColor: memberColors[idx % memberColors.length],
+              color: memberColors[idx % memberColors.length] === "#584053" ? "white" : "black"
+            }}
           >
           {person}
           </div>
