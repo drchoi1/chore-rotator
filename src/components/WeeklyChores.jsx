@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
 
+const today = new Date().toLocaleDateString(undefined, {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
 const people = ["A", "B", "C", "D"];
 const chores = [
   ["Free Week (enjoy the weekend!)"],
@@ -23,6 +29,7 @@ const chores = [
     "Mop bathroom floors (1/2 tsp all purpose cleaner in mop bucket)",
   ],
 ];
+const memberColors = ["#584053", "#8DC6BF", "#FCBC66", "#F97B4F"];
 
 function getCurrentWeekIndex() {
   const startDate = new Date("2024-01-01"); // anchor date (e.g., week 0)
@@ -38,20 +45,30 @@ function WeeklyChores() {
   useEffect(() => {
     const weekIndex = getCurrentWeekIndex();
     const rotatedPeople = [...people.slice(weekIndex), ...people.slice(0, weekIndex)];
-    const assigned = rotatedPeople.map((person, i) => ({
-      person,
-      chores: chores[i] || [],
+    const assigned = chores.map((choreList, i) => ({
+    person: rotatedPeople[i],
+    chores: choreList
     }));
     setAssignments(assigned);
   }, []);
 
   return (
-    <div className="p-6 max-w-4xl mx-auto font-sans">
+    <div key={idx} className="chore-card mb-6 border-b pb-4">
       <h1 className="text-2xl font-bold mb-4">Weekly Chore Assignments</h1>
+      <p className="text-center text-sm text-gray-600 mb-4">Today is {today}</p>
       {assignments.map(({ person, chores }, idx) => (
-        <div key={idx} className="mb-6 border-b pb-4">
-          <h2 className="text-xl font-semibold">{person}</h2>
-          <ul className="list-disc list-inside mt-2">
+        <div
+          key={idx}
+          className="mb-6 border rounded-md p-4 text-center"
+          style={{ borderColor: "#ccc" }}
+        >
+          <div
+            className="text-white font-bold text-lg py-2 rounded-t"
+            style={{ backgroundColor: memberColors[idx % memberColors.length] }}
+          >
+          {person}
+          </div>
+          <ul className="list-disc list-inside mt-2 space-y-2">
             {chores.map((chore, i) => (
               <li key={i}>{chore}</li>
             ))}
