@@ -53,7 +53,7 @@ function WeeklyChores() {
   }, []);
 
   return (
-    <div key={idx} className="chore-card mb-6 border-b pb-4">
+    <div className="chore-card mb-6 border-b pb-4">
       <h1 className="text-2xl font-bold mb-4">Weekly Chore Assignments</h1>
       <p className="text-center text-sm text-gray-600 mb-4">Today is {today}</p>
       {assignments.map(({ person, chores }, idx) => (
