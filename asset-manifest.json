@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/chore-rotator/static/css/main.e6c13ad2.css",
-    "main.js": "/chore-rotator/static/js/main.f58b10eb.js",
+    "main.js": "/chore-rotator/static/js/main.ed8e82dd.js",
     "static/js/453.3fcea564.chunk.js": "/chore-rotator/static/js/453.3fcea564.chunk.js",
     "index.html": "/chore-rotator/index.html",
     "main.e6c13ad2.css.map": "/chore-rotator/static/css/main.e6c13ad2.css.map",
-    "main.f58b10eb.js.map": "/chore-rotator/static/js/main.f58b10eb.js.map",
+    "main.ed8e82dd.js.map": "/chore-rotator/static/js/main.ed8e82dd.js.map",
     "453.3fcea564.chunk.js.map": "/chore-rotator/static/js/453.3fcea564.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.f58b10eb.js"
+    "static/js/main.ed8e82dd.js"
   ]
 }
