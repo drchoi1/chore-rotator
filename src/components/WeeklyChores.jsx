@@ -6,7 +6,7 @@ const today = new Date().toLocaleDateString(undefined, {
   month: 'long',
   day: 'numeric'
 });
-const people = ["A", "B", "C", "D"];
+const people = ["Evan", "Hyunjun", "Hee Joong", "Chloe"];
 const chores = [
   ["Free Week (enjoy the weekend!)"],
   [
