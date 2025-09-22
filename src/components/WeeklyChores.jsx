@@ -32,28 +32,21 @@ const chores = [
 const memberColors = ["#584053", "#8DC6BF", "#FCBC66", "#F97B4F"];
 
 function getCurrentWeekIndex() {
-  // Create a 'now' date string in Eastern Time (e.g. '2025-09-20')
   const now = new Date();
-  const formatter = new Intl.DateTimeFormat("en-US", {
-    timeZone: "America/New_York",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit"
-  });
 
-  const parts = formatter.formatToParts(now);
-  const dateParts = {};
-  parts.forEach(({ type, value }) => {
-    if (type !== "literal") dateParts[type] = value;
-  });
+  // Get the most recent Monday (including today if it's Monday)
+  const dayOfWeek = now.getDay(); // Sunday = 0, Monday = 1, ..., Saturday = 6
+  const daysSinceMonday = (dayOfWeek + 6) % 7; // Converts Sunday (0) to 6, Monday (1) to 0, etc.
+  const mondayThisWeek = new Date(now);
+  mondayThisWeek.setDate(now.getDate() - daysSinceMonday);
+  mondayThisWeek.setHours(0, 0, 0, 0);
 
-  const localDateString = `${dateParts.year}-${dateParts.month}-${dateParts.day}`;
-  const localNow = new Date(localDateString + "T00:00:00");
+  // Anchor date (week 0) is still Jan 1, 2024
+  const startDate = new Date("2024-01-01");
+  startDate.setHours(0, 0, 0, 0);
 
-  // Calculate week index from local time
-  const startDate = new Date("2024-01-01T00:00:00-05:00"); // EDT base time
   const msPerWeek = 1000 * 60 * 60 * 24 * 7;
-  const diffWeeks = Math.floor((localNow - startDate) / msPerWeek);
+  const diffWeeks = Math.floor((mondayThisWeek - startDate) / msPerWeek);
   return diffWeeks % people.length;
 }
 
