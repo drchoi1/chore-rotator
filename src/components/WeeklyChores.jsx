@@ -32,10 +32,28 @@ const chores = [
 const memberColors = ["#584053", "#8DC6BF", "#FCBC66", "#F97B4F"];
 
 function getCurrentWeekIndex() {
-  const startDate = new Date("2024-01-01"); // anchor date (e.g., week 0)
+  // Create a 'now' date string in Eastern Time (e.g. '2025-09-20')
   const now = new Date();
+  const formatter = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/New_York",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  });
+
+  const parts = formatter.formatToParts(now);
+  const dateParts = {};
+  parts.forEach(({ type, value }) => {
+    if (type !== "literal") dateParts[type] = value;
+  });
+
+  const localDateString = `${dateParts.year}-${dateParts.month}-${dateParts.day}`;
+  const localNow = new Date(localDateString + "T00:00:00");
+
+  // Calculate week index from local time
+  const startDate = new Date("2024-01-01T00:00:00-05:00"); // EDT base time
   const msPerWeek = 1000 * 60 * 60 * 24 * 7;
-  const diffWeeks = Math.floor((now - startDate) / msPerWeek);
+  const diffWeeks = Math.floor((localNow - startDate) / msPerWeek);
   return diffWeeks % people.length;
 }
 
